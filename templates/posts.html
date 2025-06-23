@@ -1,0 +1,46 @@
+<!doctype>
+<html>
+    <head>
+        <title> Main Page </title>
+    </head>
+    <body>
+        <h1>X2 : Home</h1>
+        <p>Better than the first X</p>
+
+        <p><b>Posts:</b></p>
+        {% if posts %}
+        <table border>
+            <tr>
+                <th> User </th>
+                <th> Content </th>
+                <th> Tag(s) </th>
+            </tr>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.uname }}</td>
+                <td>{{ post.content }}</td>
+                {% if post.tags %}
+                <td>
+                {% for tag in post.tags %}
+                    #{{ tag }}
+                {% endfor %}
+                </td>
+                {% else %}
+                <td> - </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No such user/ No posts yet</p>
+        {% endif %}
+
+        <a href="/upload">Upload a Post</a>
+        
+        <form action='/posts' method="POST">
+            <p><b>Search:</b></p>
+            <input type="text" name="uname" placeholder="Enter username" value="John"></br></br>
+            <input type="submit" value="Search">
+        </form>
+    </body>
+</html>
