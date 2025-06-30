@@ -1,19 +1,28 @@
 <!doctype>
 <html>
     <head>
-        <title> Login Page </title>
+        <link rel="stylesheet" href="/static/style.css">
+        <title> X2 Login Page </title>
     </head>
+
     <body>
+	<div class="title">
         <h1>X2 : Login</h1>
-        <p>Better than the first X</p>
-        <h3>{{ status }}</h3>
-        
+        <h3>{{ status }}</h3> </br>
+        </div>
+
         <form action='/login' method="POST">
-            <p><b>User ID</b></p>
-            <input type="text" name="uID" placeholder="Enter User ID" value="ali1312"></br>
-            <p><b>Password</b></p>
+	<div class="container">
+
+            <label for="uname"><b>User ID</b></label>
+            <input type="text" name="uID" placeholder="Enter User ID" value="ali1312"></br></br>
+
+            <label for="psw"><b>Password</b></label>
             <input type="text" name="pw" placeholder="Enter Password" value="Ta13nt"></br></br>
-            <input type="submit" value="Login">
+            
+	    <button type="submit">Login</button> 
+
+	</div>
         </form>
     </body>
 </html>

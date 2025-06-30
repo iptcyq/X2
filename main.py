@@ -43,7 +43,7 @@ def login():
         userID = uID
         return redirect(url_for('posts',user=uID))
 
-@app.route('/posts', methods=['POST'])
+@app.route('/posts', methods=['GET','POST'])
 @app.route('/posts/<user>', methods=['GET','POST'])
 def posts(user=None):
     conn = sqlite3.connect("social_media.db")
@@ -78,7 +78,7 @@ def posts(user=None):
         posts.append(Post(uID, uname, content, tags))
     conn.close()
     
-    return render_template('posts.html', posts=posts)
+    return render_template('posts.html', posts=posts, user=user)
         
 @app.route('/upload',methods=["GET","POST"])
 def upload():
@@ -117,4 +117,5 @@ def upload():
         conn.close()
         return redirect(url_for('posts',user=userID))
 
-app.run(host='0.0.0.0', port=81)
+if __name__ == "__main__":
+    app.run()

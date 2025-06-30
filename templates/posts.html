@@ -1,46 +1,60 @@
 <!doctype>
 <html>
     <head>
-        <title> Main Page </title>
+	<link rel="stylesheet" href="/static/style.css">
+        <title> X2 Home Page </title>
     </head>
     <body>
+	<div class="title">
         <h1>X2 : Home</h1>
-        <p>Better than the first X</p>
+	</div>
 
-        <p><b>Posts:</b></p>
+	<form action='/posts' method="POST">
+	<div class="container">
+            <b>Search for a user</b>
+            <input type="text" name="uname" placeholder="Enter username" value="John">
+            <button type="submit" class="searchbtn">Search</button> 
+	</div>
+        </form>
+
         {% if posts %}
-        <table border>
-            <tr>
-                <th> User </th>
-                <th> Content </th>
-                <th> Tag(s) </th>
-            </tr>
+	    <div class="title">
+	    <h2><b>{{ user }}'s posts:</b></h2>
+	    </div>
+
             {% for post in posts %}
-            <tr>
-                <td>{{ post.uname }}</td>
-                <td>{{ post.content }}</td>
-                {% if post.tags %}
-                <td>
+
+	    <div class="postcontainer">
+            <b>User: {{ post.uname }}</b>
+	    <p>{{ post.content }}</p> 
+
+	    <p>Tags: 
+	    {% if post.tags %}
                 {% for tag in post.tags %}
                     #{{ tag }}
                 {% endfor %}
-                </td>
-                {% else %}
+            {% else %}
                 <td> - </td>
-                {% endif %}
-            </tr>
-            {% endfor %}
-        </table>
-        {% else %}
-        <p>No such user/ No posts yet</p>
-        {% endif %}
+            {% endif %}
+	    </p>
+	    </div>
 
-        <a href="/upload">Upload a Post</a>
-        
-        <form action='/posts' method="POST">
-            <p><b>Search:</b></p>
-            <input type="text" name="uname" placeholder="Enter username" value="John"></br></br>
-            <input type="submit" value="Search">
-        </form>
+	    {% endfor %}
+	
+        {% else %}
+	<div class="title">
+	<h2><b>Posts:</b></h2>
+	</div>
+
+	<div class="postcontainer">
+        <p>No such user/ No posts yet</p>
+	</div>
+        {% endif %}
+	</br>
+
+	<div class="uploadpost">
+            <h3>Upload a post <a href="/upload">here</a></h3>
+	</div>
+
     </body>
 </html>
